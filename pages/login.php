@@ -1,5 +1,6 @@
 <?php
 include '../config/clients_db.inc.php';
+
 $email = $password = '';
 if(isset($_POST['submit-login'])){
     if(empty($_POST['email']) || empty($_POST['pwd'])){
@@ -10,12 +11,12 @@ if(isset($_POST['submit-login'])){
         $email = $_POST['email'];
         $password =  $_POST['pwd'];
 
-        $sql = 'SELECT id,email,password FROM user';
+        $sql = "SELECT id,email,password FROM users where email = '$email'";
         $res = mysqli_query($conn,$sql);
 
         $user_info = mysqli_fetch_assoc($res);
-         print_r($user_info['email']);
-        if($email !== $user_info['email']){
+         print_r($user_info);
+        if(!$user_info){
           header('Location:./login.php?error=UserNotFound');
           exit();
         }
@@ -24,8 +25,9 @@ if(isset($_POST['submit-login'])){
         }
         else{
           session_start();
-          $_SESSION['id'] = $user_info['id'];
-          header('Location:../index.php?login=true');
+          $_SESSION['session_id'] = $user_info['email'];
+          header('Location:./index.php?login=true');
+          exit();
         }
     }
 }
@@ -46,7 +48,6 @@ if(isset($_POST['submit-login'])){
     background-color: #fdfdfd;
     border-radius: 5px;
     padding: 8px 5px;
-    box-shadow: 3px 3px 7px #000;
     }
     .login-form h2{
         text-align: center;
@@ -54,7 +55,7 @@ if(isset($_POST['submit-login'])){
     .login-form  form .input{
         height:50px;
     width:95%;
-    border-radius: 25px;
+    border-radius: 10px;
     padding: 0 10px;
     margin:2% 0;
     outline: none;
@@ -64,12 +65,13 @@ if(isset($_POST['submit-login'])){
         border:2px solid green;
     }
     .login-form form button{
-    background-color: #000;
+    background-color: #4315e9;
     border: none;
     padding:12px 40px;
     outline: none;
-    border-radius: 10px;
+    border-radius: 5px;
     color: #fdfdfd;
+    width: 100%;
     cursor: pointer;
     margin: 2% 0;
 }
@@ -83,6 +85,7 @@ if(isset($_POST['submit-login'])){
             <input type="email" name="email" value="<?php echo htmlspecialchars($email)?>" class="input">
             <label>Password</label>
             <input type="password" name="pwd" value="<?php echo htmlspecialchars($password)?>" class="input">
+            <br/>
             <input type="checkbox">
             <label>Stay logged in for 30 days</label>
             <br/>

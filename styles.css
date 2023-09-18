@@ -10,24 +10,15 @@
     left: 0;
     position: absolute;
 }
-.head{
-    margin-top: 30px;
-    margin-left: 15px;
-}
 .btn{
     background-color: rgb(4, 34, 114);
-    color: #fff;
+    color: #dacbcbb4;
     cursor: pointer;
     text-decoration: none;
     padding: 12px 40px;
     border-radius: 5px;
 }
-.list{
-    width:90%;
-    left: 30px;
-    top:100px;
-    position: absolute;
-}
+
 .list .list_header{
     display: flex;
     justify-content: space-between;
@@ -115,4 +106,13 @@
     border: none;
     outline: none;
     text-decoration: none;
+}
+.error{
+    width:90%;
+    border: 2px solid red;
+    border-radius: 5px;
+    padding: 10px 5px;
+    background: radial-gradient(#fff,rgb(255, 136, 0));
+    height: 20vh;
+    color: red;
 }
