@@ -77,7 +77,7 @@ $employee_info = mysqli_fetch_assoc($res);
                        $sql_query = "UPDATE employees SET name='$name',nickname='$nickname',profile_img_path='$fileDestination',email='$email',phonenumber='$phone',address='$address',
                        gender='$gender',date_of_birth='$date',place_of_birth='$place_of_birth',marriage_status='$status',id_number=$id_number,passport_expiry_date='$passport_date',
                        nationality='$nationality',religion='$religion',dl_number='$dl_number',employement_type='$employement',qualifications='$qualifications',specialization='$specialization',
-                       department='$department',position='$position',salary='$salary' WHERE id = $id";
+                       department='$department',position='$position',salary='$salary' WHERE id = '$id'";
                        if(mysqli_query($conn,$sql_query)){
                         move_uploaded_file($fileTmpName,$fileDestination);
                         header('Location:./index.php?updateProfile=Success');
